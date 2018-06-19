@@ -153,7 +153,9 @@ router.get('/forgottenPass/:email', function (req, res) {
                                         This is your password - ${newPass} , please keep it in safe!!`,
             }
             transport.sendMail(mail, function (error, response) {
-                transport.close();
+                if (!error) {
+                    transport.close();
+                }
             });
             res.json({ text: 'success' })
         } else {
