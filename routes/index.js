@@ -13,7 +13,7 @@ var smtpTransport = require('nodemailer-smtp-transport');
 var mailAccountUser = 'projejct.JIRA@gmail.com'
 var mailAccountPassword = 'qg7yWFPq'
 
-var fromEmailAddress = 'project.JIRA@gmail.com'
+var fromEmailAddress = 'projejct.JIRA@gmail.com'
 
 var transport = nodemailer.createTransport({
     service: 'gmail',
@@ -158,9 +158,11 @@ router.get('/forgottenPass/:email', function (req, res) {
             transport.sendMail(mail, function (error, response) {
                 if (!error) {
                     transport.close();
+                    res.json({ text: 'success' })
+                } else {
+                    res.json({ err: 'There is problem with our service. Please try again later!' })
                 }
             });
-            res.json({ text: 'success' })
         } else {
             res.json({ err: 'There is no a user with this email!' })
         }
